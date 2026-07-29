@@ -8,6 +8,10 @@ The official website for [ffd](https://github.com/hamidrezaesh/ffd), built with 
 * React
 * TypeScript
 * Tailwind CSS
+* Cloudflare Pages
+
+## Website
+ffd-cli.pages.dev
 
 ## License
 
