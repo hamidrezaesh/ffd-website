@@ -11,7 +11,7 @@ The official website for [ffd](https://github.com/hamidrezaesh/ffd), built with 
 * Cloudflare Pages
 
 ## Website
-https://www.ffd-cli.pages.dev
+https://ffd-cli.pages.dev
 
 ## License
 
