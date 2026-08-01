@@ -66,12 +66,34 @@ export default async function Install() {
           <h2 className="text-2xl font-semibold text-gray-900">Windows</h2>
 
           <p className="mt-3 text-gray-600">
-            Native Windows installer is coming soon.
+            Before running the installer, make sure PowerShell scripts are allowed:
           </p>
 
-          <div className="mt-6 rounded-lg border border-dashed border-gray-300 bg-gray-50 p-5 text-gray-500">
-            Coming Soon
-          </div>
+          <pre className="mt-6 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-green-400">
+            <code>
+              Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+            </code>
+          </pre>
+
+          <p className="mt-3 text-gray-600">
+            Then run:
+          </p>
+
+          <pre className="mt-6 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-green-400">
+            <code>
+              irm https://raw.githubusercontent.com/hamidrezaesh/ffd/main/scripts/install.ps1 | iex
+            </code>
+          </pre>
+
+          <p className="mt-3 text-gray-600">
+            After installation, restart your terminal and run:
+          </p>
+
+          <pre className="mt-6 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-green-400">
+            <code>
+              ffd --help
+            </code>
+          </pre>
         </section>
 
         {/* Install from Release */}
