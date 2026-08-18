@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 bg-white">
+    <footer className="border-t border-gray-200 bg-gray-50">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-gray-600 md:flex-row">
         <p>
           Made by{" "}
@@ -19,7 +19,7 @@ export default function Footer() {
             href="https://github.com/hamidrezaesh/ffd-website"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-gray-900 hover:underline"
+            className="transition hover:text-gray-900 hover:underline"
           >
             Website Source
           </a>
@@ -28,7 +28,7 @@ export default function Footer() {
             href="https://github.com/hamidrezaesh/ffd"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-gray-900 hover:underline"
+            className="transition hover:text-gray-900 hover:underline"
           >
             GitHub
           </a>
