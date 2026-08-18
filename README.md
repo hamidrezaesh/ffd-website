@@ -13,6 +13,8 @@ The official website for [ffd](https://github.com/hamidrezaesh/ffd), built with 
 ## Website
 https://ffd-cli.pages.dev
 
+> The FFD CLI website was developed with assistance from ZCode.
+
 ## License
 
 This project is licensed under the [MIT License]().
