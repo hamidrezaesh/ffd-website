@@ -15,8 +15,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ffd - Fast Fetch Data",
-  description: "FFD is a fast command-line file downloader that accelerates HTTP downloads using multiple connections.",
+  title: {
+    default: "ffd - Fast File Downloader",
+    template: "%s | FFD",
+  },
+  description:
+    "FFD is a fast command-line file downloader that accelerates HTTP downloads using multiple connections.",
+
+  verification: {
+    google: "0oz6GkDiWd6mgTuONvyySkL8NAU7_dk0r5ExZ5yMiXA",
+  },
 };
 
 export default function RootLayout({
