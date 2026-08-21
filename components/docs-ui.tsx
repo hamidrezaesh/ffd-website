@@ -50,7 +50,7 @@ export function Page({ children }: { children: ReactNode }) {
 
 export function Title({ children }: { children: ReactNode }) {
   return (
-    <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+    <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
       {children}
     </h1>
   );
