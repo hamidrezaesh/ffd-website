@@ -26,6 +26,7 @@ const groups: DocGroup[] = [
       { href: "/docs/features", label: "Features" },
       { href: "/docs/usage", label: "Usage" },
       { href: "/docs/how-it-works", label: "How it works" },
+      { href: "/docs/architecture", label: "Architecture" },
     ],
   },
   {

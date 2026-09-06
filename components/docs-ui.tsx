@@ -55,3 +55,39 @@ export function Title({ children }: { children: ReactNode }) {
     </h1>
   );
 }
+
+export function Table({
+  headers,
+  rows,
+}: {
+  headers: string[];
+  rows: string[][];
+}) {
+  return (
+    <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
+      <table className="w-full text-left text-sm">
+        <thead className="bg-gray-50 text-gray-900">
+          <tr>
+            {headers.map((header) => (
+              <th key={header} className="px-4 py-3 font-semibold">
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+
+        <tbody className="divide-y divide-gray-200">
+          {rows.map((row, rowIndex) => (
+            <tr key={rowIndex} className="text-gray-600">
+              {row.map((cell, cellIndex) => (
+                <td key={cellIndex} className="px-4 py-3">
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
