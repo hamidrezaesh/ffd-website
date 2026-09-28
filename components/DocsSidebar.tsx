@@ -127,10 +127,7 @@ export default function DocsSidebar() {
         {/* Docs menu */}
         {open && (
           <div className="sticky top-[7rem] z-30 max-h-[calc(100vh-7rem)] overflow-y-auto border-b border-gray-200 bg-white px-5 py-6 shadow-lg">
-            <NavLinks
-              pathname={pathname}
-              onNavigate={() => setOpen(false)}
-            />
+            <NavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
           </div>
         )}
       </div>

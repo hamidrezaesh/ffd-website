@@ -10,7 +10,7 @@ export default async function Overview() {
       next: {
         revalidate: 3600,
       },
-    }
+    },
   );
   const markdown = await res.text();
   return (
@@ -18,12 +18,10 @@ export default async function Overview() {
       <Title>Overview</Title>
 
       <div className="prose max-w-none">
-  <ReactMarkdown
-    rehypePlugins={[rehypeRaw, rehypeHighlight]}
-  >
-    {markdown}
-  </ReactMarkdown>
-</div>
+        <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeHighlight]}>
+          {markdown}
+        </ReactMarkdown>
+      </div>
     </Page>
   );
 }

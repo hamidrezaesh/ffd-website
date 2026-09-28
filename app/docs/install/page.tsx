@@ -11,7 +11,7 @@ async function getLatestRelease() {
     "https://api.github.com/repos/hamidrezaesh/ffd/releases/latest",
     {
       next: { revalidate: 3600 }, // Refresh every hour
-    }
+    },
   );
 
   if (!res.ok) {
@@ -26,7 +26,7 @@ export default async function Install() {
 
   const assets: GitHubAsset[] = release.assets.filter(
     (asset: GitHubAsset) =>
-      asset.name.endsWith(".tar.gz") || asset.name.endsWith(".zip")
+      asset.name.endsWith(".tar.gz") || asset.name.endsWith(".zip"),
   );
 
   return (
@@ -34,8 +34,7 @@ export default async function Install() {
       <Title>Installation</Title>
 
       <P>
-        Install FFD using the official installer or download a release
-        manually.
+        Install FFD using the official installer or download a release manually.
       </P>
 
       <H2>Linux / macOS</H2>
@@ -43,7 +42,9 @@ export default async function Install() {
       <P>Install the latest version directly from GitHub.</P>
 
       <Code>
-        curl -fsSL https://raw.githubusercontent.com/hamidrezaesh/ffd/main/scripts/install.sh | sh
+        curl -fsSL
+        https://raw.githubusercontent.com/hamidrezaesh/ffd/main/scripts/install.sh
+        | sh
       </Code>
 
       <P>Verify the installation:</P>
@@ -61,7 +62,9 @@ export default async function Install() {
       <P>Then run:</P>
 
       <Code>
-        irm https://raw.githubusercontent.com/hamidrezaesh/ffd/main/scripts/install.ps1 | iex
+        irm
+        https://raw.githubusercontent.com/hamidrezaesh/ffd/main/scripts/install.ps1
+        | iex
       </Code>
 
       <P>After installation, restart your terminal and run:</P>
@@ -136,9 +139,9 @@ ffd --help`}</Code>
       <H3>Windows</H3>
 
       <P>
-        Download the appropriate <Inline>.zip</Inline> archive from the
-        Releases page. Extract <Inline>ffd.exe</Inline> and add its directory
-        to your <Inline>PATH</Inline>.
+        Download the appropriate <Inline>.zip</Inline> archive from the Releases
+        page. Extract <Inline>ffd.exe</Inline> and add its directory to your{" "}
+        <Inline>PATH</Inline>.
       </P>
 
       <P>Then run:</P>

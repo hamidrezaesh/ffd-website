@@ -11,7 +11,7 @@ async function getUsage() {
       next: {
         revalidate: 3600,
       },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -30,50 +30,40 @@ export default async function Usage() {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
-  h1: ({ children }) => <Title>{children}</Title>,
+          h1: ({ children }) => <Title>{children}</Title>,
 
-  h2: ({ children }) => <H3>{children}</H3>,
+          h2: ({ children }) => <H3>{children}</H3>,
 
-  h3: ({ children }) => <H3>{children}</H3>,
+          h3: ({ children }) => <H3>{children}</H3>,
 
-  p: ({ children }) => <P>{children}</P>,
+          p: ({ children }) => <P>{children}</P>,
 
-  table: ({ children }) => (
-    <div className="my-6 overflow-x-auto rounded-lg border">
-      <table className="w-full border-collapse text-sm">
-        {children}
-      </table>
-    </div>
-  ),
+          table: ({ children }) => (
+            <div className="my-6 overflow-x-auto rounded-lg border">
+              <table className="w-full border-collapse text-sm">
+                {children}
+              </table>
+            </div>
+          ),
 
-  thead: ({ children }) => (
-    <thead className="border-b bg-muted/50">
-      {children}
-    </thead>
-  ),
+          thead: ({ children }) => (
+            <thead className="border-b bg-muted/50">{children}</thead>
+          ),
 
-  tbody: ({ children }) => (
-    <tbody>{children}</tbody>
-  ),
+          tbody: ({ children }) => <tbody>{children}</tbody>,
 
-  tr: ({ children }) => (
-    <tr className="border-b last:border-0">
-      {children}
-    </tr>
-  ),
+          tr: ({ children }) => (
+            <tr className="border-b last:border-0">{children}</tr>
+          ),
 
-  th: ({ children }) => (
-    <th className="px-4 py-3 text-left font-semibold">
-      {children}
-    </th>
-  ),
+          th: ({ children }) => (
+            <th className="px-4 py-3 text-left font-semibold">{children}</th>
+          ),
 
-  td: ({ children }) => (
-    <td className="px-4 py-3 align-top">
-      {children}
-    </td>
-  ),
-}}
+          td: ({ children }) => (
+            <td className="px-4 py-3 align-top">{children}</td>
+          ),
+        }}
       >
         {markdown}
       </ReactMarkdown>

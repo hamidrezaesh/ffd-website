@@ -11,7 +11,7 @@ export default async function Architecture() {
       next: {
         revalidate: 3600,
       },
-    }
+    },
   );
 
   if (!res.ok) {
