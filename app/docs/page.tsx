@@ -1,14 +1,29 @@
-import { Page, P, Title } from "@/components/docs-ui";
+import { Page, Title } from "@/components/docs-ui";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeHighlight from "rehype-highlight";
 
-export default function Overview() {
+export default async function Overview() {
+  const res = await fetch(
+    "https://raw.githubusercontent.com/hamidrezaesh/ffd/main/README.md",
+    {
+      next: {
+        revalidate: 3600,
+      },
+    }
+  );
+  const markdown = await res.text();
   return (
     <Page>
       <Title>Overview</Title>
 
-      <P>
-        ffd is a simple command-line tool for downloading files quickly using
-        multiple HTTP byte ranges when supported by the server.
-      </P>
+      <div className="prose max-w-none">
+  <ReactMarkdown
+    rehypePlugins={[rehypeRaw, rehypeHighlight]}
+  >
+    {markdown}
+  </ReactMarkdown>
+</div>
     </Page>
   );
 }

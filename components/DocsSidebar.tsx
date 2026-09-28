@@ -23,9 +23,7 @@ const groups: DocGroup[] = [
     title: "Guides",
     links: [
       { href: "/docs/install", label: "Install" },
-      { href: "/docs/features", label: "Features" },
       { href: "/docs/usage", label: "Usage" },
-      { href: "/docs/how-it-works", label: "How it works" },
       { href: "/docs/architecture", label: "Architecture" },
     ],
   },

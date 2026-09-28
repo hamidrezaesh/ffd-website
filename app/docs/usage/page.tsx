@@ -1,70 +1,82 @@
 import { Code, H3, P, Page, Title, Table } from "@/components/docs-ui";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import rehypeHighlight from "rehype-highlight";
 
-export default function Usage() {
+async function getUsage() {
+  const res = await fetch(
+    "https://raw.githubusercontent.com/hamidrezaesh/ffd/main/docs/USAGE.md",
+    {
+      next: {
+        revalidate: 3600,
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch USAGE.md");
+  }
+
+  return res.text();
+}
+
+export default async function Usage() {
+  const markdown = await getUsage();
+
   return (
     <Page>
-      <Title>Usage</Title>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw, rehypeHighlight]}
+        components={{
+  h1: ({ children }) => <Title>{children}</Title>,
 
-      <H3>Basic</H3>
+  h2: ({ children }) => <H3>{children}</H3>,
 
-      <Code>ffd &lt;URL&gt;</Code>
+  h3: ({ children }) => <H3>{children}</H3>,
 
-      <P>Download multiple files:</P>
-      <Code>ffd &lt;URL1&gt; &lt;URL2&gt; &lt;URL3&gt;</Code>
+  p: ({ children }) => <P>{children}</P>,
 
-      <H3>Commands</H3>
+  table: ({ children }) => (
+    <div className="my-6 overflow-x-auto rounded-lg border">
+      <table className="w-full border-collapse text-sm">
+        {children}
+      </table>
+    </div>
+  ),
 
-      <H3>proxy</H3>
+  thead: ({ children }) => (
+    <thead className="border-b bg-muted/50">
+      {children}
+    </thead>
+  ),
 
-      <P>Start the ffd forward proxy.</P>
-      <Code>ffd proxy</Code>
+  tbody: ({ children }) => (
+    <tbody>{children}</tbody>
+  ),
 
-      <H3>update</H3>
+  tr: ({ children }) => (
+    <tr className="border-b last:border-0">
+      {children}
+    </tr>
+  ),
 
-      <P>Update ffd to the latest version.</P>
-      <Code>ffd update</Code>
+  th: ({ children }) => (
+    <th className="px-4 py-3 text-left font-semibold">
+      {children}
+    </th>
+  ),
 
-      <H3>Options</H3>
-
-      <Table
-        headers={["Option", "Short", "Description", "Default"]}
-        rows={[
-          ["--output NAME", "-o", "Custom output filename", "—"],
-          ["--wait SECONDS", "-w", "Wait before downloading", "—"],
-          ["--path PATH", "-p", "Output directory", "."],
-          ["--max-retries NUMBER", "-r", "Maximum retries", "4"],
-          ["--max-workers NUMBER", "-W", "Maximum concurrent workers", "8"],
-          ["--max-chunks NUMBER", "-c", "Maximum download chunks", "12"],
-          ["--protocol PROTOCOL", "—", "HTTP protocol to use", "auto"],
-          ["--help", "-h", "Show help", "—"],
-          ["--version", "-v", "Show version", "—"],
-        ]}
-      />
-
-      <H3>Examples</H3>
-
-      <P>Custom filename:</P>
-      <Code>ffd &lt;URL&gt; -o my-file.zip</Code>
-
-      <P>Custom download directory:</P>
-      <Code>ffd &lt;URL&gt; -p ~/Downloads</Code>
-
-      <P>More workers and chunks:</P>
-      <Code>ffd &lt;URL&gt; -W 16 -c 20</Code>
-
-      <P>Force HTTP/2:</P>
-      <Code>ffd &lt;URL&gt; --protocol http2</Code>
-
-      <P>Wait before downloading:</P>
-      <Code>ffd &lt;URL&gt; -w 10</Code>
-
-      <P>Increase retries:</P>
-      <Code>ffd &lt;URL&gt; -r 10</Code>
-
-      <P>
-        For more details about ffd&apos;s architecture and internals, see the
-        project documentation.
-      </P>
+  td: ({ children }) => (
+    <td className="px-4 py-3 align-top">
+      {children}
+    </td>
+  ),
+}}
+      >
+        {markdown}
+      </ReactMarkdown>
     </Page>
   );
 }
