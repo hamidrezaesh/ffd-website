@@ -6,29 +6,43 @@ type GitHubAsset = {
   browser_download_url: string;
 };
 
-async function getLatestRelease() {
-  const res = await fetch(
-    "https://api.github.com/repos/hamidrezaesh/ffd/releases/latest",
-    {
-      next: { revalidate: 3600 }, // Refresh every hour
-    },
-  );
+async function getLatestRelease(): Promise<GitHubAsset[]> {
+  try {
+    const res = await fetch(
+      "https://api.github.com/repos/hamidrezaesh/ffd/releases/latest",
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "ffd-docs",
+        },
+        next: { revalidate: 3600 },
+      },
+    );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch latest release.");
+    if (!res.ok) {
+      console.error(
+        `GitHub API error: ${res.status} ${res.statusText}`,
+      );
+      return [];
+    }
+
+    const release = await res.json();
+
+    return release.assets.filter(
+      (asset: GitHubAsset) =>
+        asset.name.endsWith(".tar.gz") || asset.name.endsWith(".zip"),
+    );
+  } catch (error) {
+    console.error("Failed to fetch GitHub release:", error);
+    return [];
   }
-
-  return res.json();
 }
 
 export default async function Install() {
   const release = await getLatestRelease();
 
-  const assets: GitHubAsset[] = release.assets.filter(
-    (asset: GitHubAsset) =>
-      asset.name.endsWith(".tar.gz") || asset.name.endsWith(".zip"),
-  );
-
+  const assets = await getLatestRelease();
+  
   return (
     <Page>
       <Title>Installation</Title>
