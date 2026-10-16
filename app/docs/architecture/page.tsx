@@ -1,24 +1,60 @@
+
+"use client";
+
+import { useEffect, useState } from "react";
 import { Code, H3, Page, P, Title, UL } from "@/components/docs-ui";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
 
-export default async function Architecture() {
-  const res = await fetch(
-    "https://raw.githubusercontent.com/hamidrezaesh/ffd/main/docs/ARCHITECTURE.md",
-    {
-      next: {
-        revalidate: 3600,
-      },
-    },
-  );
+const ARCHITECTURE_URL =
+  "https://raw.githubusercontent.com/hamidrezaesh/ffd/main/docs/ARCHITECTURE.md";
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch ARCHITECTURE.md");
+export default function Architecture() {
+  const [markdown, setMarkdown] = useState<string | null>(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch(ARCHITECTURE_URL, { cache: "no-store" })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch ARCHITECTURE.md");
+        }
+        return res.text();
+      })
+      .then((content) => {
+        if (!cancelled) setMarkdown(content);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch ARCHITECTURE.md:", err);
+        if (!cancelled) setError(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (error) {
+    return (
+      <Page>
+        <Title>Architecture</Title>
+        <P>Failed to load the architecture documentation. Please try again later.</P>
+      </Page>
+    );
   }
 
-  const markdown = await res.text();
+  if (markdown === null) {
+    return (
+      <Page>
+        <Title>Architecture</Title>
+        <P>Loading documentation...</P>
+      </Page>
+    );
+  }
 
   return (
     <Page>
