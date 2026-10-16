@@ -38,6 +38,12 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
+          href="/roadmap"
+          className="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-medium text-gray-700 transition hover:border-gray-900 hover:bg-gray-900 hover:text-white"
+          >
+            Roadmap
+          </a>
+          <a
             href="https://github.com/hamidrezaesh/ffd"
             target="_blank"
             rel="noopener noreferrer"
